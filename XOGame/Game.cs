@@ -17,7 +17,7 @@ namespace XOGame
             {
                 boardSize = int.Parse(Console.ReadLine());
 
-                if (boardSize >= 3)
+                if (boardSize <= 2)
                 {
                     Console.WriteLine("Board Size Cant be less than 3");
                     return ;
