@@ -9,18 +9,10 @@ namespace XOGame
     {
         public static void Main(string[] args)
         {
-            int boardSize = 3;
+            Game XO_Game = new Game();
+            XO_Game.StartGame();
 
-            Console.WriteLine("XO GAME");
-            Console.WriteLine("===========");
-            Console.Write("Please enter board size:");
-            boardSize = int.Parse(Console.ReadLine());
-            Console.Clear();
-
-            XOBoard XOGame = new XOBoard(boardSize);
-            XOGame.Display();
-
-            Console.Write("");
+            Console.Write("Press any key to continue...");
             Console.ReadKey();
         }
     }
