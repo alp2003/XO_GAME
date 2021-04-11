@@ -11,7 +11,18 @@ namespace XOGame
         {
             GameTitle();
             Console.Write("Please enter board size: ");
-            int boardSize = int.Parse(Console.ReadLine());
+            int boardSize = 0;
+
+            try
+            {
+                boardSize = int.Parse(Console.ReadLine());
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
             XOBoard XOGame = new XOBoard(boardSize);
             bool isUserAskToExit = false;
             bool isGameOver = false;
@@ -27,22 +38,29 @@ namespace XOGame
                 Console.WriteLine("Player {0} Move (move ex: E5, q for exit): ", player);
                 move = Console.ReadLine();
 
-                if (move == "Q" || move == "q")
+                if (move != string.Empty && move.Length <= 2)
                 {
-                    isUserAskToExit = true;
-                }
-                else
-                {
-                    if (char.IsDigit(move[1]) && char.IsLetter(move[0]))
+                    if (move == "Q" || move == "q")
                     {
-                        XOGame.Put(move, player);
-                        Player winStatus = XOGame.Status();
-                        checkStatus(winStatus, out isGameOver);
-                        countMove++;
+                        isUserAskToExit = true;
                     }
-                }
+                    else
+                    {
+                        if (move.Length == 2 && char.IsDigit(move[1]) && char.IsLetter(move[0]))
+                        {
+                            XOGame.Put(move, player);
+                            Player winStatus = XOGame.Status();
+                            checkStatus(winStatus, out isGameOver);
+                            countMove++;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
 
-                player = countMove % 2 == 0 ? Player.X : Player.O;
+                    player = countMove % 2 == 0 ? Player.X : Player.O;
+                }
 
             }
 
