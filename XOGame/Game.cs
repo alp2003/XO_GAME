@@ -12,10 +12,16 @@ namespace XOGame
             GameTitle();
             Console.Write("Please enter board size: ");
             int boardSize = 0;
-
+            
             try
             {
                 boardSize = int.Parse(Console.ReadLine());
+
+                if (boardSize >= 3)
+                {
+                    Console.WriteLine("Board Size Cant be less than 3");
+                    return ;
+                }
             }
             catch (System.Exception ex)
             {
